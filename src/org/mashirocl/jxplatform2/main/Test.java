@@ -64,8 +64,7 @@ public class Test {
 	}
 	
 	
-	static List<ClassJson> getProject(String name, String target,String classpath){
-		ModelBuilderBatch builderBatch = new ModelBuilderBatch();
+	static List<ClassJson> getProject(ModelBuilderBatch builderBatch,String name, String target,String classpath){
 		builderBatch.setLogVisible(true);
 		JavaProject jproject = builderBatch.build(name, target, classpath);
 		
@@ -80,6 +79,9 @@ public class Test {
 
 			cJList.add(cJ);
 		}
+		
+
+		
 		return cJList;
 	}
 	
@@ -96,9 +98,13 @@ public class Test {
 		String target="/Users/leichen/JAVA/test_code/refactoring-toy-example/src";	//the path of the top directory that contains Java Source files in the project
 		String classpath="/Users/leichen/JAVA/test_code/refactoring-toy-example/src"; //the path of the top directory that contains Java class files and/or jar files
 		
-		List<ClassJson> cJList=getProject(name,target,classpath);
+		ModelBuilderBatch builderBatch = new ModelBuilderBatch();
+		
+		List<ClassJson> cJList=getProject(builderBatch,name,target,classpath);
 		String jsonString=encode(cJList);
 		
+		
+		builderBatch.unbuild();
 	}
 
 }
