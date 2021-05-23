@@ -21,6 +21,7 @@ public class Test {
 		String target="/Users/leichen/JAVA/test_code/refactoring-toy-example/src";	//the path of the top directory that contains Java Source files in the project
 		String classpath="/Users/leichen/JAVA/test_code/refactoring-toy-example/src"; //the path of the top directory that contains Java class files and/or jar files
 		
+		
 //		String target =args[0];
 //		String classpath = args[1];
 		
@@ -62,11 +63,8 @@ public class Test {
 		
 	}
 	
-	static void encode() {
-		String name="test";			//an arbitrary project name
-		String target="/Users/leichen/JAVA/test_code/refactoring-toy-example/src";	//the path of the top directory that contains Java Source files in the project
-		String classpath="/Users/leichen/JAVA/test_code/refactoring-toy-example/src"; //the path of the top directory that contains Java class files and/or jar files
-		
+	
+	static List<ClassJson> getProject(String name, String target,String classpath){
 		ModelBuilderBatch builderBatch = new ModelBuilderBatch();
 		builderBatch.setLogVisible(true);
 		JavaProject jproject = builderBatch.build(name, target, classpath);
@@ -79,30 +77,27 @@ public class Test {
 			cJ.setClass(jclass);
 			cJ.setJFields(jclass.getFields());
 			cJ.setJMethod(jclass.getMethods());
-//			cJ.setmJ(jclass.getMethods());
-			
-//			for (JavaField jf:jclass.getFields())
-//			{
-//				cJ.setJFields(jf);
-//			}
-//			
-//			for (JavaMethod jm:jclass.getMethods())
-//			{
-//				cJ.setJMethod(jm);
-//				
-//			}
+
 			cJList.add(cJ);
 		}
-		
-
-		String jsonString = JSON.toJSONString(cJList);
+		return cJList;
+	}
+	
+	
+	static String encode(List<ClassJson> cJ) {
+		String jsonString = JSON.toJSONString(cJ);
 		System.out.println(jsonString);
-		
+		return jsonString;
 	}
 
+	
 	public static void main(String[] args) {
-//		jxplatform2();
-		encode();
+		String name="test";			//an arbitrary project name
+		String target="/Users/leichen/JAVA/test_code/refactoring-toy-example/src";	//the path of the top directory that contains Java Source files in the project
+		String classpath="/Users/leichen/JAVA/test_code/refactoring-toy-example/src"; //the path of the top directory that contains Java class files and/or jar files
+		
+		List<ClassJson> cJList=getProject(name,target,classpath);
+		String jsonString=encode(cJList);
 		
 	}
 
