@@ -11,6 +11,7 @@ import org.jtool.eclipse.javamodel.JavaMethod;
 import org.jtool.eclipse.javamodel.JavaField;
 import org.jtool.eclipse.javamodel.JavaLocalVar;
 
+import java.io.*;
 
 import com.alibaba.fastjson.JSON;
 
@@ -63,15 +64,27 @@ public class Test {
 		
 	}
 	
+	public static void writeJson(String filePath, String content) throws IOException {
+		FileWriter fw = new FileWriter(filePath);
+		PrintWriter out= new PrintWriter(fw);
+		out.write(content);
+		out.println();
+		fw.close();
+		out.close();
+	}
 	
-	static List<ClassJson> getProject(ModelBuilderBatch builderBatch,String name, String target,String classpath){
+	static JavaProject getProject(ModelBuilderBatch builderBatch,String name, String target,String classpath) {
 		builderBatch.setLogVisible(true);
-		JavaProject jproject = builderBatch.build(name, target, classpath);
+		JavaProject jProject = builderBatch.build(name, target, classpath); 
+		return jProject;
+	}
+	
+	static List<ClassJson> getClasses(JavaProject jProject){
 		
 		
 		List<ClassJson> cJList=new ArrayList<ClassJson>();
 		
-		for(JavaClass jclass:jproject.getClasses()) {	
+		for(JavaClass jclass:jProject.getClasses()) {	
 			ClassJson cJ=new ClassJson();
 			cJ.setClass(jclass);
 			cJ.setJFields(jclass.getFields());
@@ -100,8 +113,25 @@ public class Test {
 		
 		ModelBuilderBatch builderBatch = new ModelBuilderBatch();
 		
-		List<ClassJson> cJList=getProject(builderBatch,name,target,classpath);
+		int classNum=0;
+		
+		JavaProject jProject=getProject(builderBatch,name,target,classpath);
+		List<ClassJson> cJList=getClasses(jProject);
+		
+		
+		classNum=cJList.size();
+		
+		
 		String jsonString=encode(cJList);
+		
+		System.out.println("classNum is "+String.valueOf(classNum));
+		
+		String path="/Users/leichen/Code/jxplatform2Json/RTE.json";
+		try {
+			writeJson(path,jsonString);
+		} catch (IOException e){
+			e.printStackTrace();
+		}
 		
 		
 		builderBatch.unbuild();
