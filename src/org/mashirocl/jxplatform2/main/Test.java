@@ -79,6 +79,7 @@ public class Test {
 			cJ.setClass(jclass);
 			cJ.setJFields(jclass.getFields());
 			cJ.setJMethod(jclass.getMethods());
+//			cJ.setmJ(jclass.getMethods());
 			
 //			for (JavaField jf:jclass.getFields())
 //			{
