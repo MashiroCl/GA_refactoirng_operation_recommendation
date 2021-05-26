@@ -17,7 +17,9 @@ public class ClassJson {
 	private List<MethodJson> mJ;
 	
 	public String getClassName() {
-		return jClass.getName();
+		
+		String classInfo=String.valueOf(jClass.getModifiers())+"#"+jClass.getName();
+		return classInfo;
 	}
 	
 	public void setClass(JavaClass jClass) {
@@ -29,7 +31,7 @@ public class ClassJson {
 		List<String> fieldList=new ArrayList<String>();
 		try {
 			for(JavaField jF:jFields) {
-				fieldList.add(jF.toString().split("\nFIELD: ")[1]);
+				fieldList.add(String.valueOf(jF.getModifiers())+"#"+jF.toString().split("\nFIELD: ")[1]);
 			}
 			
 			
@@ -52,9 +54,12 @@ public class ClassJson {
 				modifier=jM.getModifiers();
 //				jMethod.add(String.valueOf(modifier));
 //				jMethod.add(jM.toString().split("\\nMETHOD: ")[1]);
+
 				String temp=String.valueOf(modifier)+"@"+jM.getName()+"()@"+jM.getReturnType();
+				
 				for (JavaLocalVar jV:jM.getParameters()) {
-					temp=temp+"#"+String.valueOf(jV.getModifiers())+jV.toString().split("\n")[1];
+
+					temp=temp+"#"+jV.toString().split("\n")[1];
 				}
 				jMethod.add(temp);
 				

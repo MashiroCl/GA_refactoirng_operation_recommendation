@@ -1,6 +1,10 @@
 package org.mashirocl.jxplatform2.main;
 
+import java.util.ArrayList;
+
 import org.jtool.eclipse.javamodel.JavaMethod;
+
+
 
 public class MethodJson {
 	private String modifier;
@@ -23,6 +27,7 @@ public class MethodJson {
 	}
 	public String getParameter() {
 		return "parameters";
+
 	}
 	
 }
