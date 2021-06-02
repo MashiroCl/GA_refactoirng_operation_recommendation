@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jtool.eclipse.batch.ModelBuilderBatch;
+import org.jtool.eclipse.cfg.CCFG;
+import org.jtool.eclipse.cfg.CFG;
+import org.jtool.eclipse.pdg.ClDG;
+import org.jtool.eclipse.pdg.PDG;
 import org.jtool.eclipse.cfg.builder.JClassExternal;
 import org.jtool.eclipse.javamodel.JavaProject;
 import org.jtool.eclipse.javamodel.JavaClass;
@@ -35,8 +39,18 @@ public class Test {
 
 		for (JavaClass jclass : jproject.getClasses()){
 				String className=jclass.getName();
-				List<JavaField> variables=jclass.getFields();
-				
+//				List<JavaField> variables=jclass.getFields();
+//				List<JavaClass> jc_temp=jclass.getChildren();
+//				List<JavaClass> jc_temp2=jclass.getAllSuperClasses();
+//				
+//				System.out.println("_____________________________________________");
+//				for (JavaClass jclass2:jc_temp) {
+//					System.out.println(jclass2.getName());
+//				}
+//				for (JavaClass jclass2:jc_temp2) {
+//					System.out.println(jclass2.getName());
+//				}
+
 				
 //				System.out.println("Class name is:"+className);
 //				System.out.println("Variables are:"+variables.toString());
@@ -53,10 +67,10 @@ public class Test {
 
 				
 				}
-				for (JavaField jfield : jclass.getFields()) {
+//				for (JavaField jfield : jclass.getFields()) {
 //					jfield.print();
-				}
-				
+//				}
+//				
 		}
 		
 		
@@ -89,7 +103,9 @@ public class Test {
 			cJ.setClass(jclass);
 			cJ.setJFields(jclass.getFields());
 			cJ.setJMethod(jclass.getMethods());
-
+			cJ.setChildren(jclass);
+			cJ.setSuperClass(jclass);
+	
 			cJList.add(cJ);
 		}
 		
@@ -108,8 +124,15 @@ public class Test {
 	
 	public static void main(String[] args) {
 		String name="test";			//an arbitrary project name
-		String target="/Users/leichen/JAVA/test_code/refactoring-toy-example/src";	//the path of the top directory that contains Java Source files in the project
-		String classpath="/Users/leichen/JAVA/test_code/refactoring-toy-example/src"; //the path of the top directory that contains Java class files and/or jar files
+//		String target="/Users/leichen/JAVA/test_code/refactoring-toy-example/src";	//the path of the top directory that contains Java Source files in the project
+//		String classpath="/Users/leichen/JAVA/test_code/refactoring-toy-example/src"; //the path of the top directory that contains Java class files and/or jar files
+		
+		String target="/Users/leichen/JAVA/test_code/CKJM-extended/src";
+		String classpath="/Users/leichen/JAVA/test_code/CKJM-extended/src";
+				
+//		String path="/Users/leichen/Code/jxplatform2Json/RTE.json";
+		String path="/Users/leichen/Code/jxplatform2Json/CKJM_EXT.json";
+		
 		
 		ModelBuilderBatch builderBatch = new ModelBuilderBatch();
 		
@@ -118,6 +141,7 @@ public class Test {
 		JavaProject jProject=getProject(builderBatch,name,target,classpath);
 		List<ClassJson> cJList=getClasses(jProject);
 		
+			
 		
 		classNum=cJList.size();
 		
@@ -126,13 +150,14 @@ public class Test {
 		
 		System.out.println("classNum is "+String.valueOf(classNum));
 		
-		String path="/Users/leichen/Code/jxplatform2Json/RTE.json";
+
 		try {
 			writeJson(path,jsonString);
 		} catch (IOException e){
 			e.printStackTrace();
 		}
 		
+		jxplatform2();
 		
 		builderBatch.unbuild();
 	}
