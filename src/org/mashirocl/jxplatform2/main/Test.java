@@ -99,8 +99,8 @@ public class Test {
 		List<ClassJson> cJList=new ArrayList<ClassJson>();
 		
 		for(JavaClass jclass:jProject.getClasses()) {	
-			ClassJson cJ=new ClassJson();
-			cJ.setClass(jclass);
+			ClassJson cJ=new ClassJson(jclass);
+//			cJ.setClass(jclass);
 			cJ.setJFields(jclass.getFields());
 			cJ.setJMethod(jclass.getMethods());
 			cJ.setChildren(jclass);

@@ -14,17 +14,16 @@ public class ClassJson {
 	private JavaClass jClass;
 	private List<JavaField> jFields;
 	private List<JavaMethod> jMethods;
-	private List<MethodJson> mJ;
 	private List<JavaClass> superClass;
 	private List<JavaClass> children;
 	
-//	public ClassJson(JavaClass jc) {
-//		this.jClass=jc;
-//		this.jFields=jc.getFields();
-//		this.jMethods=jc.getMethods();
-//		this.superClass=jc.getAllSuperClasses();
-//		this.children=jc.getChildren();
-//	}
+	public ClassJson (JavaClass jc) {
+		this.jClass=jc;
+//		this.jFields=this.jClass.getFields();
+//		this.jMethods=this.jClass.getMethods();
+//		this.superClass=this.jClass.getSuperClass();
+//		this.children=this.jClass.getChildren();
+	}
 	
 	
 	public String getClassName() {
@@ -82,15 +81,20 @@ public class ClassJson {
 	public void setSuperClass(JavaClass jclass) {
 		this.superClass=jclass.getAllSuperClasses();
 	}
-	public List<String> getSuperClass(){
+	public List<String> getSuperClass() throws NullPointerException{
 		List<String> temp=new ArrayList<String>();
 		for (JavaClass jc:this.superClass) {
-			ClassJson cj=new ClassJson();
+			ClassJson cj=new ClassJson(jc);
 			cj.setClass(jc);
-			try {
-			temp.add(cj.getClassName());
-			}catch (Exception e)
-			{}
+			cj.setJMethod(jc.getMethods());
+			List<String> temp2=new ArrayList<String>();
+			String name=cj.getClassName();
+			List<String> method=cj.getJMethod();
+			temp2.add(name);
+			temp2.add(method.toString());
+			
+			temp.add(temp2.toString());
+			
 		}
 		return temp;
 	}
@@ -98,16 +102,24 @@ public class ClassJson {
 	public void setChildren(JavaClass jclass) {
 		this.children=jclass.getChildren();
 	}
-	public List<String> getChildren(){
-		List<String> temp=new ArrayList<String>();
-		for (JavaClass jc:this.children) {
-			ClassJson cj=new ClassJson();
-			cj.setClass(jc);
-			try {
-			temp.add(cj.getClassName());
-			}catch (Exception e)
-			{}
-		}
-		return temp;
-	}
+//	public List<String> getChildren() throws NullPointerException{
+//		List<String> temp=new ArrayList<String>();
+//		for (JavaClass jc:this.children) {
+//			ClassJson cj=new ClassJson(jc);
+//			cj.setChildren(jc);
+//			try {
+//			temp.add(jc.toString());
+//			}catch (Exception e)
+//			{e.printStackTrace();}
+//		}
+//		return temp;
+//	}
+	
+	
+//	public List<String> toStringList() {
+//		List<String> temp=new ArrayList<String>();
+//		temp.add(this.getClassName());
+//		
+//		return temp;
+//	}
 }
