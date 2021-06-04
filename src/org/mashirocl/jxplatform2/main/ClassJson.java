@@ -81,27 +81,27 @@ public class ClassJson {
 	public void setSuperClass(JavaClass jclass) {
 		this.superClass=jclass.getAllSuperClasses();
 	}
-	public List<String> getSuperClass() throws NullPointerException{
-		List<String> temp=new ArrayList<String>();
+	public List<List> getSuperClass() throws NullPointerException{
+		List<List> temp=new ArrayList<List>();
 		for (JavaClass jc:this.superClass) {
 			ClassJson cj=new ClassJson(jc);
 			cj.setClass(jc);
 			cj.setJMethod(jc.getMethods());
-			List<String> temp2=new ArrayList<String>();
+			List<Object> temp2=new ArrayList<Object>();
 			String name=cj.getClassName();
 			List<String> method=cj.getJMethod();
+
 			temp2.add(name);
-			temp2.add(method.toString());
-			
-			temp.add(temp2.toString());
-			
+			temp2.add(method);
+			temp.add(temp2);
 		}
 		return temp;
 	}
+}
 	
-	public void setChildren(JavaClass jclass) {
-		this.children=jclass.getChildren();
-	}
+//	public void setChildren(JavaClass jclass) {
+//		this.children=jclass.getChildren();
+//	}
 //	public List<String> getChildren() throws NullPointerException{
 //		List<String> temp=new ArrayList<String>();
 //		for (JavaClass jc:this.children) {
@@ -115,11 +115,3 @@ public class ClassJson {
 //		return temp;
 //	}
 	
-	
-//	public List<String> toStringList() {
-//		List<String> temp=new ArrayList<String>();
-//		temp.add(this.getClassName());
-//		
-//		return temp;
-//	}
-}

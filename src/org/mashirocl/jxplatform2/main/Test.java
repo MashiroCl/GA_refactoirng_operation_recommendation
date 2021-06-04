@@ -103,7 +103,7 @@ public class Test {
 //			cJ.setClass(jclass);
 			cJ.setJFields(jclass.getFields());
 			cJ.setJMethod(jclass.getMethods());
-			cJ.setChildren(jclass);
+//			cJ.setChildren(jclass);
 			cJ.setSuperClass(jclass);
 	
 			cJList.add(cJ);
