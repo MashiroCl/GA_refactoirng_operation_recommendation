@@ -100,6 +100,7 @@ public class Test {
 		
 		for(JavaClass jclass:jProject.getClasses()) {	
 			ClassJson cJ=new ClassJson(jclass);
+			cJ.setPackage(jclass.getPackage());
 //			cJ.setClass(jclass);
 			cJ.setJFields(jclass.getFields());
 			cJ.setJMethod(jclass.getMethods());
@@ -124,12 +125,15 @@ public class Test {
 	
 	public static void main(String[] args) {
 		String name="test";			//an arbitrary project name
-//		String target="/Users/leichen/JAVA/test_code/refactoring-toy-example/src";	//the path of the top directory that contains Java Source files in the project
-//		String classpath="/Users/leichen/JAVA/test_code/refactoring-toy-example/src"; //the path of the top directory that contains Java class files and/or jar files
+	//	String target="/Users/leichen/JAVA/test_code/refactoring-toy-example/src";	//the path of the top directory that contains Java Source files in the project
+	//	String classpath="/Users/leichen/JAVA/test_code/refactoring-toy-example/src"; //the path of the top directory that contains Java class files and/or jar files
 		
-		String target="/Users/leichen/JAVA/test_code/CKJM-extended/src";
-		String classpath="/Users/leichen/JAVA/test_code/CKJM-extended/src";
-				
+	//	String target="/Users/leichen/JAVA/test_code/CKJM-extended/src";
+	//	String classpath="/Users/leichen/JAVA/test_code/CKJM-extended/src";
+		
+		String target="/Users/leichen/Code/CKJM-extended/src";
+		String classpath="/Users/leichen/Code/CKJM-extended/src";
+		
 //		String path="/Users/leichen/Code/jxplatform2Json/RTE.json";
 		String path="/Users/leichen/Code/jxplatform2Json/CKJM_EXT.json";
 		

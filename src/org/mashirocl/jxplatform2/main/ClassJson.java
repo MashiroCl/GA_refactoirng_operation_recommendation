@@ -9,6 +9,7 @@ import org.jtool.eclipse.javamodel.JavaClass;
 import org.jtool.eclipse.javamodel.JavaMethod;
 import org.jtool.eclipse.javamodel.JavaField;
 import org.jtool.eclipse.javamodel.JavaLocalVar;
+import org.jtool.eclipse.javamodel.JavaPackage;
 
 public class ClassJson {
 	private JavaClass jClass;
@@ -16,13 +17,10 @@ public class ClassJson {
 	private List<JavaMethod> jMethods;
 	private List<JavaClass> superClass;
 	private List<JavaClass> children;
+	private JavaPackage jpackage;
 	
 	public ClassJson (JavaClass jc) {
 		this.jClass=jc;
-//		this.jFields=this.jClass.getFields();
-//		this.jMethods=this.jClass.getMethods();
-//		this.superClass=this.jClass.getSuperClass();
-//		this.children=this.jClass.getChildren();
 	}
 	
 	
@@ -97,8 +95,13 @@ public class ClassJson {
 		}
 		return temp;
 	}
-}
-	
+
+	public void setPackage(JavaPackage jp) {
+		this.jpackage=jp;
+	}
+	public String getJPackage() {
+		return this.jpackage.getName();
+	}
 //	public void setChildren(JavaClass jclass) {
 //		this.children=jclass.getChildren();
 //	}
@@ -114,4 +117,5 @@ public class ClassJson {
 //		}
 //		return temp;
 //	}
+}
 	
