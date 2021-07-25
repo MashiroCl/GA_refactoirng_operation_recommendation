@@ -14,6 +14,7 @@ import org.jtool.eclipse.javamodel.JavaClass;
 import org.jtool.eclipse.javamodel.JavaMethod;
 import org.jtool.eclipse.javamodel.JavaField;
 import org.jtool.eclipse.javamodel.JavaLocalVar;
+import org.jtool.eclipse.javamodel.JavaFile;
 
 import java.io.*;
 
@@ -39,6 +40,7 @@ public class Test {
 
 		for (JavaClass jclass : jproject.getClasses()){
 				String className=jclass.getName();
+				JavaFile javaFile=jclass.getFile();
 //				List<JavaField> variables=jclass.getFields();
 //				List<JavaClass> jc_temp=jclass.getChildren();
 //				List<JavaClass> jc_temp2=jclass.getAllSuperClasses();
@@ -106,6 +108,7 @@ public class Test {
 			cJ.setJMethod(jclass.getMethods());
 //			cJ.setChildren(jclass);
 			cJ.setSuperClass(jclass);
+			cJ.setFile(jclass.getFile());
 	
 			cJList.add(cJ);
 		}

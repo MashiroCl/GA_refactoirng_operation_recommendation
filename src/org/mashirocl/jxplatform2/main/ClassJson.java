@@ -10,6 +10,7 @@ import org.jtool.eclipse.javamodel.JavaMethod;
 import org.jtool.eclipse.javamodel.JavaField;
 import org.jtool.eclipse.javamodel.JavaLocalVar;
 import org.jtool.eclipse.javamodel.JavaPackage;
+import org.jtool.eclipse.javamodel.JavaFile;
 
 public class ClassJson {
 	private JavaClass jClass;
@@ -18,6 +19,8 @@ public class ClassJson {
 	private List<JavaClass> superClass;
 	private List<JavaClass> children;
 	private JavaPackage jpackage;
+	private JavaFile jFile;
+	private String filePath;
 	
 	public ClassJson (JavaClass jc) {
 		this.jClass=jc;
@@ -117,5 +120,11 @@ public class ClassJson {
 //		}
 //		return temp;
 //	}
+	public void setFile(JavaFile file) {
+		this.jFile=file;
+	}
+	public String getFilePath() {
+		return this.jFile.getPath();
+	}
 }
 	
