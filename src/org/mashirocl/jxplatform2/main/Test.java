@@ -133,12 +133,12 @@ public class Test {
 		
 	//	String target="/Users/leichen/JAVA/test_code/CKJM-extended/src";
 	//	String classpath="/Users/leichen/JAVA/test_code/CKJM-extended/src";
-		
-		String target="/Users/leichen/Code/CKJM-extended/src";
-		String classpath="/Users/leichen/Code/CKJM-extended/src";
+	//   "/Users/leichen/Code/jxplatform2Json/CKJM_EXT.json"
+		String target=args[0];
+		String classpath=args[1];
 		
 //		String path="/Users/leichen/Code/jxplatform2Json/RTE.json";
-		String path="/Users/leichen/Code/jxplatform2Json/CKJM_EXT.json";
+		String outputJsonPath=args[2];
 		
 		
 		ModelBuilderBatch builderBatch = new ModelBuilderBatch();
@@ -147,19 +147,15 @@ public class Test {
 		
 		JavaProject jProject=getProject(builderBatch,name,target,classpath);
 		List<ClassJson> cJList=getClasses(jProject);
-		
-			
-		
+
 		classNum=cJList.size();
-		
 		
 		String jsonString=encode(cJList);
 		
 		System.out.println("classNum is "+String.valueOf(classNum));
-		
 
 		try {
-			writeJson(path,jsonString);
+			writeJson(outputJsonPath,jsonString);
 		} catch (IOException e){
 			e.printStackTrace();
 		}
